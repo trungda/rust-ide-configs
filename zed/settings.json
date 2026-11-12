@@ -1,0 +1,193 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+{
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4.5"
+    },
+    "model_parameters": []
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "dark",
+    "light": "One Dark",
+    "dark": "Dark+ (Cursor)"
+  },
+
+  // Ported from Cursor
+  "buffer_font_family": "JetBrains Mono",
+  "relative_line_numbers": "enabled",
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always"
+  },
+  "inlay_hints": {
+    "enabled": true,
+    "show_background": false
+  },
+
+  "languages": {
+    "Rust": {
+      "wrap_guides": [120],
+      "show_wrap_guides": true,
+      "colorize_brackets": true,
+      "semantic_tokens": "combined",
+      "completions": {
+        "words": "disabled"
+      }
+    }
+  },
+
+  "lsp": {
+    "rust-analyzer": {
+      "binary": {
+        "env": {
+          "CHALK_OVERFLOW_DEPTH": "500",
+          "RA_PROFILE": "*>5000"
+        }
+      },
+      "initialization_options": {
+        "checkOnSave": true,
+        "cargo": {
+          "buildScripts": { "enable": true }
+        },
+        "procMacro": {
+          "enable": true,
+          "attributes": { "enable": true },
+          "ignored": {
+            "tracing-attributes": ["instrument"]
+          }
+        },
+        "inlayHints": {
+          "maxLength": 50,
+          "closingBraceHints": { "enable": true, "minLines": 15 },
+          "lifetimeElisionHints": { "enable": "always" }
+        },
+        "diagnostics": {
+          "disabled": ["macro-error"],
+          "warningsAsHint": ["dead_code", "unused_variables"]
+        },
+        "imports": {
+          "granularity": { "enforce": true }
+        },
+        "lru": { "capacity": 65535 },
+        "rustfmt": {
+          "rangeFormatting": { "enable": true }
+        },
+        "completion": {
+          "snippets": {
+            "custom": {
+              "Arc::new": { "postfix": "arc", "body": ["Arc::new(${receiver})"], "requires": "std::sync::Arc", "scope": "expr" },
+              "if ==": { "postfix": "ife", "body": ["if ${receiver} == $1 {", "    $0", "}"], "scope": "expr" },
+              "if >=": { "postfix": "ifge", "body": ["if ${receiver} >= $1 {$0}"], "scope": "expr" },
+              "Rc::new": { "postfix": "rc", "body": ["Rc::new(${receiver})"], "requires": "std::rc::Rc", "scope": "expr" },
+              "Box::pin": { "postfix": "boxpin", "body": ["Box::pin(${receiver})"], "scope": "expr" },
+              "unsafe": { "postfix": "unsafe", "body": ["unsafe { ${receiver} }"], "scope": "expr" },
+              "spawn future": { "postfix": "spawn", "body": ["let $1 = task::spawn(${receiver});"], "scope": "expr", "requires": "tokio::task" },
+              "spawn future block": { "prefix": "spawn", "body": ["let $1 = task::spawn(async move { ", "    $0", "});"], "scope": "expr", "requires": "tokio::task" },
+              "Duration::from_secs": { "postfix": "sec", "body": ["Duration::from_secs(${receiver})"], "scope": "expr", "requires": "std::time::Duration" },
+              "Duration::from_millis": { "postfix": "ms", "body": ["Duration::from_millis(${receiver})"], "scope": "expr", "requires": "std::time::Duration" },
+              "afn": { "prefix": "afn", "body": ["async fn $1($2) {", "    $0", "}"], "scope": "item" },
+              "afr": { "prefix": "afr", "body": ["async fn $1($2) -> $3 {", "    $0", "}"], "scope": "item" },
+              "afo": { "prefix": "afo", "body": ["async fn $1($2) -> Option<$3> {", "    $0", "}"], "scope": "item" },
+              "fms": { "prefix": "fms", "body": ["fn $1(&mut self, $2) -> $3 {", "    $0", "}"], "scope": "expr" },
+              "Ok": { "postfix": "ok", "body": "Ok(${receiver})", "description": "Wrap the expression in a `Result::Ok`", "scope": "expr" },
+              "Err": { "postfix": "err", "body": "Err(${receiver})", "description": "Wrap the expression in a `Result::Err`", "scope": "expr" },
+              "Some": { "postfix": "some", "body": "Some(${receiver})", "description": "Wrap the expression in an `Option::Some`", "scope": "expr" }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  // rust-analyzer semantic token colors, ported from Cursor's
+  // editor.semanticTokenColorCustomizations. More specific rules come first.
+  "global_lsp_settings": {
+    "semantic_token_rules": [
+      { "token_type": "method", "token_modifiers": ["static", "unsafe"], "foreground_color": "#d68855" },
+      { "token_type": "method", "token_modifiers": ["declaration", "unsafe"], "foreground_color": "#df732b" },
+      { "token_type": "method", "token_modifiers": ["library", "unsafe"], "foreground_color": "#df732b" },
+      { "token_type": "method", "token_modifiers": ["library", "static"], "foreground_color": "#f0c506" },
+      { "token_type": "method", "token_modifiers": ["library", "trait"], "foreground_color": "#d1ce08" },
+      { "token_type": "method", "token_modifiers": ["unsafe"], "foreground_color": "#df732b" },
+      { "token_type": "method", "token_modifiers": ["static"], "foreground_color": "#f0c506" },
+      { "token_type": "method", "token_modifiers": ["trait"], "foreground_color": "#cca34a" },
+      { "token_type": "method", "token_modifiers": ["library"], "foreground_color": "#a5cf0a" },
+      { "token_type": "method", "token_modifiers": ["public"], "foreground_color": "#eedf54" },
+      { "token_type": "function", "token_modifiers": ["unsafe"], "foreground_color": "#df732b" },
+      { "token_type": "keyword", "token_modifiers": ["unsafe"], "foreground_color": "#df732b" },
+
+      { "token_type": "variable", "token_modifiers": ["consuming"], "font_weight": "bold" },
+      { "token_type": "variable", "token_modifiers": ["reference"], "font_style": "italic" },
+      { "token_type": "parameter", "token_modifiers": ["consuming"], "foreground_color": "#00afce", "font_weight": "bold" },
+      { "token_type": "parameter", "token_modifiers": ["reference"], "foreground_color": "#00afce", "font_style": "italic" },
+      { "token_type": "parameter", "foreground_color": "#00afce" },
+
+      { "token_type": "builtinAttribute", "token_modifiers": ["attribute"], "foreground_color": "#8ec03e" },
+      { "token_type": "generic", "token_modifiers": ["attribute"], "foreground_color": "#07faeece" },
+      { "token_type": "generic", "token_modifiers": ["injected"], "foreground_color": "#4ec9b0" },
+      { "token_type": "attribute", "token_modifiers": ["library"], "foreground_color": "#b0ff31c4" },
+      { "token_type": "decorator", "token_modifiers": ["attribute"], "foreground_color": "#3fcc8a" },
+      { "token_type": "derive", "token_modifiers": ["attribute"], "foreground_color": "#2cbd79" },
+      { "token_type": "deriveHelper", "token_modifiers": ["attribute"], "foreground_color": "#2cbd79" },
+      { "token_type": "parenthesis", "token_modifiers": ["attribute"], "foreground_color": "#338d63" },
+
+      { "token_type": "interface", "token_modifiers": ["library"], "foreground_color": "#ffd99f" },
+      { "token_type": "interface", "foreground_color": "#f7ae40" },
+      { "token_type": "typeAlias", "token_modifiers": ["trait"], "foreground_color": "#f1e6a3" },
+      { "token_type": "typeAlias", "foreground_color": "#10d1dd" },
+      { "token_type": "namespace", "token_modifiers": ["library"], "foreground_color": "#b4c499" },
+      { "token_type": "namespace", "foreground_color": "#99bfc4" },
+      { "token_type": "keyword", "token_modifiers": ["async", "controlFlow"], "foreground_color": "#ca99f8" },
+      { "token_type": "keyword", "token_modifiers": ["async"], "foreground_color": "#ca99f8" },
+      { "token_type": "keyword", "token_modifiers": ["controlFlow"], "foreground_color": "#e689bc" },
+      { "token_type": "keyword", "token_modifiers": ["crateRoot"], "foreground_color": "#a7aeaf" },
+      { "token_type": "operator", "token_modifiers": ["controlFlow"], "foreground_color": "#fd8b5d" },
+
+      { "token_type": "typeParameter", "foreground_color": "#ca90fa", "font_weight": "bold" },
+      { "token_type": "constParameter", "foreground_color": "#c15aca", "font_weight": "bold" },
+      { "token_type": "lifetime", "foreground_color": "#11ddcc" },
+      { "token_type": "selfKeyword", "foreground_color": "#809dff" },
+      { "token_type": "enum", "foreground_color": "#17b1d8" },
+      { "token_type": "struct", "foreground_color": "#4ec9b0" },
+      { "token_type": "property", "foreground_color": "#75bfe7" },
+      { "token_type": "macro", "foreground_color": "#c0b5ff" },
+      { "token_type": "boolean", "foreground_color": "#14b16f" },
+      { "token_type": "string", "foreground_color": "#e98e6a" },
+      { "token_type": "builtinType", "foreground_color": "#b7fc89cb" },
+      { "token_type": "unresolvedReference", "foreground_color": "#ff493c", "underline": true },
+
+      { "token_type": "brace", "foreground_color": "#f0ddddda" },
+      { "token_type": "operator", "foreground_color": "#d4d4d4da" },
+      { "token_type": "comma", "foreground_color": "#d4d4d4da" },
+      { "token_type": "colon", "foreground_color": "#d4d4d4da" },
+      { "token_type": "semicolon", "foreground_color": "#d4d4d4da" },
+      { "token_type": "punctuation", "foreground_color": "#d4d4d4da" },
+      { "token_type": "parenthesis", "foreground_color": "#d4d4d4da" },
+      { "token_type": "angle", "foreground_color": "#d4d4d4da" }
+    ]
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "[rust]": {
+    "editor.rulers": [
+      {
+        "color": "#41414188",
+        "column": 120
+      }
+    ],
+    "editor.wordBasedSuggestions": "off",
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.suggest.preview": true
+  },
+ "rust-analyzer.server.extraEnv": {
+    "CHALK_OVERFLOW_DEPTH": "500",
+    "RA_PROFILE": "*>5000"
+  },
+  "rust-analyzer.checkOnSave.enable": true,
+  "rust-analyzer.inlayHints.maxLength": 50,
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.procMacro.attributes.enable": true,
+  "rust-analyzer.cargo.buildScripts.enable": true,
+//  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.procMacro.ignored": {
+    // "async-trait": ["async_trait"],
+    "tracing-attributes": ["instrument"]
+  },
+  "rust-analyzer.inlayHints.closingBraceHints.enable": true,
+  "rust-analyzer.inlayHints.closingBraceHints.minLines": 15,
+  "rust-analyzer.diagnostics.warningsAsHint": ["dead_code", "unused_variables"],
+  "workbench.colorCustomizations": {
+    "[Default Dark+]": {
+      "statusBar.background": "#2d2d2d",
+      "statusBarItem.remoteBackground": "#1b1b1b",
+      "editorInlayHint.background": "#00000000",
+      "editorInlayHint.foreground": "#ffffff75"
+    }
+  },
+  "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
+  "editor.semanticTokenColorCustomizations": {
+    "[Default Dark+]": {
+      "enabled": true,
+      "rules": {
+        "variable.reference": {
+          "italic": true
+        },
+        "parameter.reference": {
+          "italic": true
+        },
+        "method.static": {
+          "foreground": "#f0c506"
+        },
+        "method.public": {
+          "foreground": "#eedf54"
+        },
+        "method.library": {
+          "foreground": "#a5cf0a"
+        },
+        "method.library.static": {
+          "foreground": "#f0c506"
+        },
+        "method.trait": {
+          "foreground": "#cca34a"
+        },
+        "method.library.trait": {
+          "foreground": "#d1ce08"
+        },
+        "lifetime": {
+          "foreground": "#11ddcc"
+        },
+        "method.static.unsafe": {
+          "foreground": "#d68855"
+        },
+        "method.declaration.unsafe": {
+          "foreground": "#df732b"
+        },
+        "method.library.unsafe": {
+          "foreground": "#df732b"
+        },
+        "interface.library": "#ffd99f",
+        "builtinAttribute.attribute": {
+          "foreground": "#8ec03e"
+        },
+        "generic.attribute": {
+          "foreground": "#07faeece"
+        },
+        "attribute.library": {
+          "foreground": "#b0ff31c4"
+        },
+        "decorator.attribute": {
+          "foreground": "#3fcc8a"
+        },
+        "derive.attribute": {
+          "foreground": "#2cbd79"
+        },
+        "deriveHelper.attribute": {
+          "foreground": "#2cbd79"
+        },
+        "parenthesis.attribute": {
+          "foreground": "#338d63"
+        },
+        "typeParameter": {
+          "foreground": "#ca90fa",
+          "bold": true
+        },
+        "selfKeyword": "#809dff",
+        "enum": "#17b1d8",
+        "property": {
+          "foreground": "#75bfe7"
+        },
+        "parameter": {
+          "foreground": "#00afce"
+        },
+        "*.consuming": {
+          "bold": true
+        },
+        "namespace": {
+          "foreground": "#99bfc4"
+        },
+        "namespace.library": {
+          "foreground": "#b4c499"
+        },
+        "unresolvedReference": {
+          "foreground": "#ff493c",
+          "underline": true
+        },
+        "operator": {
+          "foreground": "#d4d4d4da"
+        },
+        "comma": {
+          "foreground": "#d4d4d4da"
+        },
+        "colon": {
+          "foreground": "#d4d4d4da"
+        },
+        "semicolon": {
+          "foreground": "#d4d4d4da"
+        },
+        "punctuation": {
+          "foreground": "#d4d4d4da"
+        },
+        "brace": {
+          "foreground": "#f0ddddda"
+        },
+        "parenthesis": {
+          "foreground": "#d4d4d4da"
+        },
+        "builtinType": {
+          "foreground": "#b7fc89cb"
+        },
+        "angle": {
+          "foreground": "#d4d4d4da"
+        },
+        "operator.controlFlow": {
+          "foreground": "#fd8b5d"
+        },
+        "interface": "#f7ae40",
+        "typeAlias.trait": "#f1e6a3",
+        "keyword.controlFlow": {
+          "foreground": "#e689bc"
+        },
+        "keyword.async": {
+          "foreground": "#ca99f8"
+        },
+        "keyword.async.controlFlow": {
+          "foreground": "#ca99f8"
+        },
+        "macro": {
+          "foreground": "#c0b5ff"
+        },
+        "boolean": {
+          "foreground": "#14b16f"
+        },
+        "string": {
+          "foreground": "#e98e6a"
+        },
+        "typeAlias": {
+          "foreground": "#10d1dd"
+        },
+        "constParameter": {
+          "foreground": "#c15aca",
+          "bold": true
+        },
+        "struct": {
+          "foreground": "#4EC9B0"
+        },
+        "generic.injected": {
+          "foreground": "#4EC9B0"
+        },
+        "keyword.crateRoot": {
+          "foreground": "#a7aeaf"
+        },
+        "*.unsafe": {
+          "foreground": "#df732b"
+        }
+      }
+    }
+  },
+  "editor.inlayHints.enabled": "on",
+  "rust-analyzer.imports.granularity.enforce": true,
+  "rust-analyzer.completion.snippets.custom": {
+    "Arc::new": {
+      "postfix": "arc",
+      "body": ["Arc::new(${receiver})"],
+      "requires": "std::sync::Arc",
+      "scope": "expr"
+    },
+    "if ==": {
+      "postfix": "ife",
+      "body": ["if ${receiver} == $1 {", "    $0", "}"],
+      "scope": "expr"
+    },
+    "if >=": {
+      "postfix": "ifge",
+      "body": ["if ${receiver} >= $1 {$0}"],
+      "scope": "expr"
+    },
+    "Rc::new": {
+      "postfix": "rc",
+      "body": ["Rc::new(${receiver})"],
+      "requires": "std::rc::Rc",
+      "scope": "expr"
+    },
+    "Box::pin": {
+      "postfix": "boxpin",
+      "body": ["Box::pin(${receiver})"],
+      "scope": "expr"
+    },
+    "unsafe": {
+      "postfix": "unsafe",
+      "body": ["unsafe { ${receiver} }"],
+      "scope": "expr"
+    },
+    "spawn future": {
+      "postfix": "spawn",
+      "body": ["let $1 = task::spawn(${receiver});"],
+      "scope": "expr",
+      "requires": "tokio::task"
+    },
+    "spawn future block": {
+      "prefix": "spawn",
+      "body": ["let $1 = task::spawn(async move { ", "    $0", "});"],
+      "scope": "expr",
+      "requires": "tokio::task"
+    },
+    "Duration::from_secs": {
+      "postfix": "sec",
+      "body": ["Duration::from_secs(${receiver})"],
+      "scope": "expr",
+      "requires": "std::time::Duration"
+    },
+    "Duration::from_millis": {
+      "postfix": "ms",
+      "body": ["Duration::from_millis(${receiver})"],
+      "scope": "expr",
+      "requires": "std::time::Duration"
+    },
+    "afn": {
+      "prefix": "afn",
+      "body": ["async fn $1($2) {", "    $0", "}"],
+      "scope": "item"
+    },
+    "afr": {
+      "prefix": "afr",
+      "body": ["async fn $1($2) -> $3 {", "    $0", "}"],
+      "scope": "item"
+    },
+    "afo": {
+      "prefix": "afo",
+      "body": ["async fn $1($2) -> Option<$3> {", "    $0", "}"],
+      "scope": "item"
+    },
+    "fms": {
+      "prefix": "fms",
+      "body": ["fn $1(&mut self, $2) -> $3 {", "    $0", "}"],
+      "scope": "expr"
+    },
+    "Ok": {
+      "postfix": "ok",
+      "body": "Ok(${receiver})",
+      "description": "Wrap the expression in a `Result::Ok`",
+      "scope": "expr"
+    },
+    "Err": {
+      "postfix": "err",
+      "body": "Err(${receiver})",
+      "description": "Wrap the expression in a `Result::Err`",
+      "scope": "expr"
+    },
+    "Some": {
+      "postfix": "some",
+      "body": "Some(${receiver})",
+      "description": "Wrap the expression in an `Option::Some`",
+      "scope": "expr"
+    }
+  },
+  "rust-analyzer.diagnostics.disabled": ["macro-error"],
+  "rust-analyzer.lru.capacity": 65535,
+  "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+  "editor.fontFamily": "JetBrains Mono",
+  "makefile.configureOnOpen": false,
+  "extensions.ignoreRecommendations": true,
+  "window.autoDetectColorScheme": false,
+  "go.toolsManagement.autoUpdate": true,
+  "clangd.path": "/Users/tdinh/Library/Application Support/Cursor/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.0/clangd_22.1.0/bin/clangd",
+  "git.openRepositoryInParentFolders": "never",
+  "editor.lineNumbers": "relative",
+  "vim.useSystemClipboard": true,
+  "cursor.composer.queueMessageDefaultBehavior": "steer"
+ }
